@@ -1,0 +1,28 @@
+html {
+	background-color: #f4f4f9; /* Optional outer background */
+}
+
+body {
+	max-width: 1200px; /* Caps the width on large screens */
+	margin: 0 auto; /* Centers the body horizontally */
+	padding: 20px; /* Prevents text from touching screen edges on mobile */
+	background-color: #ffffff;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+tr.completed {
+	background-color: #e0e0e0; /* Light gray background for completed matches */
+}
+th,
+td {
+	border: 1px solid lightgray;
+	padding: 4px;
+	text-align: center;
+}
+
+.winner {
+	background-color: lightgreen; /* Light green background for winners */
+}

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chefs | Tournament | 2026-11-13</title>
+
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+  <h1>Chefs | School Tournament </h1>
+  <p>
+    <strong>Date:</strong> November 13, 2026 (Friday) <br>
+    <strong>Time:</strong> 8:00 PM – 10:00 PM <br>
+    <strong>Venue:</strong> Lorne Park Secondary School <br>
+    <strong>Level:</strong> 3.0+ <br>
+    <strong>Format:</strong> Mixed Doubles | Random Partners  <br>
+	<strong>Scoring Format:</strong> Rally Scoring <br>
+    <strong>Match Limit:</strong> First to 11 points or 10 minutes per match, whichever comes first.
+
+	<br><br>
+
+    <strong>Courts:</strong> <span id="courtsCount"></span> <br>
+    <strong>Rounds:</strong> <span id="roundsCount"></span> <br>
+	<strong>Players:</strong> <span id="playersCount"></span> <br>
+    <strong>Total Matches:</strong> <span id="matchesCount"></span> <br>
+    <strong>Matches Per Player:</strong> <span id="matchesPerPlayerCount"></span> <br>
+  </p>
+
+  <hr>
+
+  <h3>Matches</h3>
+  <div class="admin" style="display: none;">
+	<select id="matchesPerPlayerSelect">
+		<option value="4">4 Matches Per Player</option>
+		<option value="5">5 Matches Per Player</option>
+		<option value="6">6 Matches Per Player</option>
+		<option value="7">7 Matches Per Player</option>
+		<option value="8">8 Matches Per Player</option>
+	</select>
+	<select id="courtsSelect">
+		<option value="2">2 Courts</option>
+		<option value="3">3 Courts</option>
+	</select>
+
+	<br><button onclick="generateMatches()">Generate Matches</button>
+	<span id="matchesMessage"></span>
+
+	<br><br><button onclick="resetScores()">Reset Scores</button>
+	<button onclick="generateRandomScore()">Generate Random Score</button>
+
+	<br><br><button onclick="saveDatabase()">Save </button>
+
+  </div>
+
+	View:
+	<select id="filterByPlayer">
+		<option value="" selected>-- ALL PLAYERS --</option>
+	</select>
+	<button onclick="loadDatabase()">Refresh</button>
+
+
+  <br><br>
+  <table id="scheduleTable">
+    <thead>
+        <tr>
+          <th>Round</th>
+          <th>Court</th>
+          <th>Team 1</th>
+          <th>Team 2</th>
+          <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <h3>Queens</h3>
+  <table id="queensTable">
+    <thead>
+        <tr>
+          <th>Player</th>
+          <th>Total</th>
+          <th>Win</th>
+          <th>Loss</th>
+          <th>Points</th>
+          <th>Rank</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <h3>Kings</h3>
+  <table id="kingsTable">
+    <thead>
+        <tr>
+          <th>Player</th>
+          <th>Total</th>
+          <th>Win</th>
+          <th>Loss</th>
+          <th>Points</th>
+          <th>Rank</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</body>
+
+<script src="tournament.js"></script>
+
+<script>
+	const tournamentId = 1;
+	let database = {};
+
+	function loadDatabase() {
+	// load tournament data from the server using the tournamentId
+	fetch(`/api/tournaments/${tournamentId}`)
+		.then((response) => response.json())
+		.then((data) => {
+			database = data;
+
+			const allPlayers = [...database.queens.map((q) => q.player), ...database.kings.map((k) => k.player)];
+			allPlayers.sort().forEach((player) => {
+				const option = document.createElement('option');
+				option.value = player;
+				option.textContent = player;
+				document.getElementById('filterByPlayer').appendChild(option);
+			});
+
+			calculatePoints();
+
+			render();
+		})
+		.catch((error) => {
+			console.error('Error loading tournament data:', error);
+		});
+
+	}
+
+		function saveScore(matchIdx, score) {
+			// PUT /api/tournaments/:id/matches/:matchIndex
+			// Request body: { "score": [11, 9] }
+			fetch(`/api/tournaments/${tournamentId}/matches/${matchIdx}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ score })
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('Score saved:', data);
+			})
+			.catch((error) => {
+				console.error('Error saving score:', error);
+				alert('Error saving score. Please try again.\n' + error);
+				loadDatabase();
+			});
+		}
+
+		function saveDatabase() {
+			// PUT /api/tournaments/:id
+			fetch(`/api/tournaments/${tournamentId}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(database)
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('Database saved:', data);
+			})
+			.catch((error) => {
+				console.error('Error saving database:', error);
+				alert('Error saving database. Please try again.\n' + error);
+				loadDatabase();
+			});
+		}
+
+		loadDatabase();
+
+	function generateMatches() {
+		const matchesMessage = document.getElementById("matchesMessage");
+		matchesMessage.textContent = "Generating matches...";
+
+		try {
+			database.matchs = generateTournament(
+				database.queens.map(q => q.player),
+				database.kings.map(k => k.player),
+				database.matchesPerPlayer,      // Matches per player
+				database.courts                 // Number of courts
+			);
+
+			database.rounds = Math.ceil(database.matchs.length / database.courts);
+
+			// count total matches for each player
+			database.queens.forEach(player => {
+				player.total = database.matchs.filter(match => match.team1.includes(player.player) || match.team2.includes(player.player)).length;
+			});
+			database.kings.forEach(player => {
+				player.total = database.matchs.filter(match => match.team1.includes(player.player) || match.team2.includes(player.player)).length;
+			});
+
+			matchesMessage.textContent = "Matches generated successfully.";
+
+		} catch (e) {
+			console.error("Error generating matches:", e);
+			matchesMessage.textContent = "Error: " + e.message;
+		}
+
+		calculatePoints();
+		render();
+	}
+
+	function generateRandomScore() {
+		database.matchs.forEach(match => {
+			// generate random score between 0 and 11, one team has to win with score 11
+			match.score = [Math.floor(Math.random() * 12), Math.floor(Math.random() * 12)];
+			if (match.score[0] !== 11 && match.score[1] !== 11) {
+				if (Math.random() < 0.5) {
+					match.score[0] = 11;
+				} else {
+					match.score[1] = 11;
+				}
+			}
+		});
+
+		calculatePoints();
+
+		render();
+	}
+
+	function resetScores() {
+		database.matchs.forEach(match => {
+			match.score = [0, 0];
+		});
+
+		calculatePoints();
+
+		render();
+	}
+
+	function calculatePoints() {
+		function calculate(players) {
+			players.forEach(player => {
+				player.win = database.matchs.filter(
+					(match) =>
+						(match.team1.includes(player.player) && match.score[0] > match.score[1]) ||
+						(match.team2.includes(player.player) && match.score[1] > match.score[0]),
+				).length;
+				player.loss = database.matchs.filter(
+					(match) =>
+						(match.team1.includes(player.player) && match.score[0] < match.score[1]) ||
+						(match.team2.includes(player.player) && match.score[1] < match.score[0]),
+				).length;
+
+				// points = sum(score difference) for all matches played by the player
+				player.points = database.matchs.filter(match => match.team1.includes(player.player) || match.team2.includes(player.player))
+					.reduce((sum, match) => {
+						if (match.team1.includes(player.player)) {
+							const scoreDiff = match.score[0] - match.score[1];
+							return sum + scoreDiff;
+						} else if (match.team2.includes(player.player)) {
+							const scoreDiff = match.score[1] - match.score[0];
+							return sum + scoreDiff;
+						}
+						return sum;
+					}, 0);
+			})
+		}
+
+		calculate(database.queens);
+		calculate(database.kings);
+
+		// rank by win count + points
+		function rank(players) {
+			players.sort((a, b) => b.win - a.win || b.points - a.points);
+			players.forEach((player, idx) => {
+				player.rank = idx + 1;
+			});
+		}
+		rank(database.queens);
+		rank(database.kings);
+	}
+
+	function renderText(elmementId, value) {
+		document.getElementById(elmementId).textContent = value;
+	}
+	function renderValue(elementId, value) {
+		document.getElementById(elementId).value = value;
+	}
+
+	function renderPlayers(element, players) {
+        element.innerHTML = "";
+        players.forEach(player => {
+            element.innerHTML += `<tr><td>${player.player}</td><td>${player.total}</td><td>${player.win}</td><td>${player.loss}</td><td>${player.points}</td><td>${player.rank}</td></tr>`;
+        });
+	}
+
+	function renderFilter() {
+		const filterByPlayerControl = document.getElementById('filterByPlayer');
+		const filterByPlayer = localStorage.getItem('filterByPlayer') || '';
+		const defaultFilterByPlayer = `<option value=""${filterByPlayer === '' ? ' selected' : ''}>-- ALL PLAYERS --</option>`;
+		filterByPlayerControl.innerHTML = defaultFilterByPlayer;
+		const allPlayers = [...database.queens.map((q) => q.player), ...database.kings.map((k) => k.player)];
+		allPlayers.sort().forEach((player) => {
+			const option = document.createElement('option');
+			option.value = player;
+			option.textContent = player;
+			if (filterByPlayer === player) {
+				option.selected = true;
+			}
+			filterByPlayerControl.appendChild(option);
+		});
+	}
+
+	function render() {
+		renderText("courtsCount", database.courts);
+		renderText("playersCount", database.queens.length + " + " + database.kings.length);
+		renderText("matchesCount", database.matchs.length );
+		renderText("roundsCount", database.rounds);
+		renderText("matchesPerPlayerCount", database.matchesPerPlayer);
+
+		renderFilter();
+
+		renderValue("courtsSelect", database.courts);
+		renderValue("matchesPerPlayerSelect", database.matchesPerPlayer);
+
+		const selectedPlayer = document.getElementById("filterByPlayer").value;
+		const scheduleTable = document.querySelector("#scheduleTable tbody");
+		scheduleTable.innerHTML = "";
+		database.matchs.forEach((match, idx) => {
+			// winer team display with a green box
+			const team1Class = match.score[0] > match.score[1] ? "winner" : "";
+			const team2Class = match.score[1] > match.score[0] ? "winner" : "";
+			const completed = match.score[0] > 0 || match.score[1] > 0;
+			if (selectedPlayer === "" || match.team1.includes(selectedPlayer) || match.team2.includes(selectedPlayer)) {
+				scheduleTable.innerHTML += `<tr${completed ? ' class="completed"' : ''}><td>${match.round}</td><td>${match.court}</td><td class="${team1Class}"><div>${match.team1[0]}</div><div>${match.team1[1]}</div></td><td class="${team2Class}"><div>${match.team2[0]}</div><div>${match.team2[1]}</div></td><td><div onclick="editMatch(${idx})" style="cursor:pointer;">${match.score[0]}-${match.score[1]}</div></td></tr$>`;
+			}
+		});
+
+        renderPlayers(document.querySelector("#queensTable tbody"), database.queens);
+        renderPlayers(document.querySelector("#kingsTable tbody"), database.kings);
+	}
+
+		function editMatch(idx) {
+			const match = database.matchs[idx];
+			const newScore = prompt(
+				`Enter new score\n- Round ${match.round}\n- Court ${match.court}\n- Format: x-y (any separator)`,
+				`${match.score[0]}-${match.score[1]}`,
+			);
+			if (newScore) {
+				// spliit by any non-digit character
+				const [score1, score2] = newScore.split(/\D+/).map(Number);
+				if (!isNaN(score1) && !isNaN(score2)) {
+					match.score = [score1, score2];
+					calculatePoints();
+					render();
+
+					saveScore(idx, [score1, score2]);
+				} else {
+					alert('Invalid score format.');
+				}
+			}
+		}
+
+	document.getElementById("courtsSelect").addEventListener("change", (event) => {
+		database.courts = parseInt(event.target.value);
+	});
+	document.getElementById("matchesPerPlayerSelect").addEventListener("change", (event) => {
+		database.matchesPerPlayer = parseInt(event.target.value);
+	});
+
+	// if(database.matchs.length === 0) {
+	// 	generateMatches();
+	// } else {
+	// 	render();
+	// }
+
+	// init filter
+	const filterByPlayer = document.getElementById('filterByPlayer');
+	filterByPlayer.addEventListener('change', (event) => {
+		localStorage.setItem('filterByPlayer', event.target.value);
+		render();
+	});
+</script>
+</html>
