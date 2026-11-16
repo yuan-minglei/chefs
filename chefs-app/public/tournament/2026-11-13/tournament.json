@@ -1,0 +1,737 @@
+{
+    "queens": [
+        {
+            "player": "任丽",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 1
+        },
+        {
+            "player": "Amy",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 2
+        },
+        {
+            "player": "Haseena",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 3
+        },
+        {
+            "player": "Jin",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 4
+        },
+        {
+            "player": "Xi C",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 5
+        },
+        {
+            "player": "Qian Li",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 6
+        },
+        {
+            "player": "Jennifer H.",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 7
+        },
+        {
+            "player": "Sherry Wei",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 8
+        },
+        {
+            "player": "Ellen",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 9
+        }
+    ],
+    "kings": [
+        {
+            "player": "RX",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 1
+        },
+        {
+            "player": "Sam Zhou",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 2
+        },
+        {
+            "player": "Steven",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 3
+        },
+        {
+            "player": "MingLei Yuan",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 4
+        },
+        {
+            "player": "Victor",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 5
+        },
+        {
+            "player": "Richard L",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 6
+        },
+        {
+            "player": "Luke X",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 7
+        },
+        {
+            "player": "Tan",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 8
+        },
+        {
+            "player": "熊报",
+            "total": 8,
+            "win": 0,
+            "loss": 0,
+            "points": 0,
+            "rank": 9
+        }
+    ],
+    "matchs": [
+        {
+            "team1": [
+                "Haseena",
+                "MingLei Yuan"
+            ],
+            "team2": [
+                "Jennifer H.",
+                "Victor"
+            ],
+            "round": 1,
+            "court": 1,
+            "score": [
+                11,
+                6
+            ]
+        },
+        {
+            "team1": [
+                "Sherry Wei",
+                "Luke X"
+            ],
+            "team2": [
+                "Jin",
+                "熊报"
+            ],
+            "round": 1,
+            "court": 2,
+            "score": [
+                10,
+                11
+            ]
+        },
+        {
+            "team1": [
+                "Ellen",
+                "Tan"
+            ],
+            "team2": [
+                "Xi C",
+                "Richard L"
+            ],
+            "round": 1,
+            "court": 3,
+            "score": [
+                6,
+                11
+            ]
+        },
+        {
+            "team1": [
+                "Xi C",
+                "Victor"
+            ],
+            "team2": [
+                "任丽",
+                "Steven"
+            ],
+            "round": 2,
+            "court": 1,
+            "score": [
+                11,
+                3
+            ]
+        },
+        {
+            "team1": [
+                "Amy",
+                "MingLei Yuan"
+            ],
+            "team2": [
+                "Haseena",
+                "Luke X"
+            ],
+            "round": 2,
+            "court": 2,
+            "score": [
+                11,
+                3
+            ]
+        },
+        {
+            "team1": [
+                "Ellen",
+                "Richard L"
+            ],
+            "team2": [
+                "Qian Li",
+                "Sam Zhou"
+            ],
+            "round": 2,
+            "court": 3,
+            "score": [
+                5,
+                11
+            ]
+        },
+        {
+            "team1": [
+                "Qian Li",
+                "MingLei Yuan"
+            ],
+            "team2": [
+                "Amy",
+                "熊报"
+            ],
+            "round": 3,
+            "court": 1,
+            "score": [
+                11,
+                6
+            ]
+        },
+        {
+            "team1": [
+                "任丽",
+                "RX"
+            ],
+            "team2": [
+                "Jin",
+                "Tan"
+            ],
+            "round": 3,
+            "court": 2,
+            "score": [
+                8,
+                11
+            ]
+        },
+        {
+            "team1": [
+                "Sherry Wei",
+                "Victor"
+            ],
+            "team2": [
+                "Jennifer H.",
+                "Steven"
+            ],
+            "round": 3,
+            "court": 3,
+            "score": [
+                11,
+                10
+            ]
+        },
+        {
+            "team1": [
+                "Xi C",
+                "Sam Zhou"
+            ],
+            "team2": [
+                "Haseena",
+                "熊报"
+            ],
+            "round": 4,
+            "court": 1,
+            "score": [
+                15,
+                8
+            ]
+        },
+        {
+            "team1": [
+                "Amy",
+                "Victor"
+            ],
+            "team2": [
+                "Ellen",
+                "RX"
+            ],
+            "round": 4,
+            "court": 2,
+            "score": [
+                15,
+                6
+            ]
+        },
+        {
+            "team1": [
+                "Jin",
+                "Luke X"
+            ],
+            "team2": [
+                "Qian Li",
+                "Richard L"
+            ],
+            "round": 4,
+            "court": 3,
+            "score": [
+                8,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Jennifer H.",
+                "Luke X"
+            ],
+            "team2": [
+                "任丽",
+                "Tan"
+            ],
+            "round": 5,
+            "court": 1,
+            "score": [
+                15,
+                9
+            ]
+        },
+        {
+            "team1": [
+                "Haseena",
+                "Steven"
+            ],
+            "team2": [
+                "Jin",
+                "RX"
+            ],
+            "round": 5,
+            "court": 2,
+            "score": [
+                15,
+                13
+            ]
+        },
+        {
+            "team1": [
+                "Sherry Wei",
+                "Richard L"
+            ],
+            "team2": [
+                "Xi C",
+                "MingLei Yuan"
+            ],
+            "round": 5,
+            "court": 3,
+            "score": [
+                8,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Jennifer H.",
+                "熊报"
+            ],
+            "team2": [
+                "Amy",
+                "Steven"
+            ],
+            "round": 6,
+            "court": 1,
+            "score": [
+                15,
+                13
+            ]
+        },
+        {
+            "team1": [
+                "Xi C",
+                "Tan"
+            ],
+            "team2": [
+                "Qian Li",
+                "Victor"
+            ],
+            "round": 6,
+            "court": 2,
+            "score": [
+                15,
+                11
+            ]
+        },
+        {
+            "team1": [
+                "任丽",
+                "Richard L"
+            ],
+            "team2": [
+                "Haseena",
+                "Sam Zhou"
+            ],
+            "round": 6,
+            "court": 3,
+            "score": [
+                15,
+                7
+            ]
+        },
+        {
+            "team1": [
+                "Qian Li",
+                "RX"
+            ],
+            "team2": [
+                "任丽",
+                "MingLei Yuan"
+            ],
+            "round": 7,
+            "court": 1,
+            "score": [
+                15,
+                9
+            ]
+        },
+        {
+            "team1": [
+                "Amy",
+                "Luke X"
+            ],
+            "team2": [
+                "Sherry Wei",
+                "Tan"
+            ],
+            "round": 7,
+            "court": 2,
+            "score": [
+                11,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Jin",
+                "Steven"
+            ],
+            "team2": [
+                "Ellen",
+                "Sam Zhou"
+            ],
+            "round": 7,
+            "court": 3,
+            "score": [
+                15,
+                4
+            ]
+        },
+        {
+            "team1": [
+                "Jennifer H.",
+                "Sam Zhou"
+            ],
+            "team2": [
+                "Xi C",
+                "RX"
+            ],
+            "round": 8,
+            "court": 1,
+            "score": [
+                14,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Amy",
+                "Tan"
+            ],
+            "team2": [
+                "Jin",
+                "Richard L"
+            ],
+            "round": 8,
+            "court": 2,
+            "score": [
+                13,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Sherry Wei",
+                "熊报"
+            ],
+            "team2": [
+                "Ellen",
+                "Victor"
+            ],
+            "round": 8,
+            "court": 3,
+            "score": [
+                14,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Jennifer H.",
+                "RX"
+            ],
+            "team2": [
+                "Qian Li",
+                "Luke X"
+            ],
+            "round": 9,
+            "court": 1,
+            "score": [
+                11,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Haseena",
+                "Richard L"
+            ],
+            "team2": [
+                "Sherry Wei",
+                "Steven"
+            ],
+            "round": 9,
+            "court": 2,
+            "score": [
+                15,
+                7
+            ]
+        },
+        {
+            "team1": [
+                "Jin",
+                "MingLei Yuan"
+            ],
+            "team2": [
+                "Xi C",
+                "熊报"
+            ],
+            "round": 9,
+            "court": 3,
+            "score": [
+                15,
+                10
+            ]
+        },
+        {
+            "team1": [
+                "Qian Li",
+                "熊报"
+            ],
+            "team2": [
+                "Haseena",
+                "Victor"
+            ],
+            "round": 10,
+            "court": 1,
+            "score": [
+                4,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Jin",
+                "Sam Zhou"
+            ],
+            "team2": [
+                "Jennifer H.",
+                "MingLei Yuan"
+            ],
+            "round": 10,
+            "court": 2,
+            "score": [
+                8,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Ellen",
+                "Steven"
+            ],
+            "team2": [
+                "任丽",
+                "Luke X"
+            ],
+            "round": 10,
+            "court": 3,
+            "score": [
+                15,
+                10
+            ]
+        },
+        {
+            "team1": [
+                "Qian Li",
+                "Tan"
+            ],
+            "team2": [
+                "Sherry Wei",
+                "Sam Zhou"
+            ],
+            "round": 11,
+            "court": 1,
+            "score": [
+                15,
+                12
+            ]
+        },
+        {
+            "team1": [
+                "任丽",
+                "Victor"
+            ],
+            "team2": [
+                "Amy",
+                "Richard L"
+            ],
+            "round": 11,
+            "court": 2,
+            "score": [
+                15,
+                11
+            ]
+        },
+        {
+            "team1": [
+                "Haseena",
+                "RX"
+            ],
+            "team2": [
+                "Ellen",
+                "Luke X"
+            ],
+            "round": 11,
+            "court": 3,
+            "score": [
+                15,
+                11
+            ]
+        },
+        {
+            "team1": [
+                "Xi C",
+                "Steven"
+            ],
+            "team2": [
+                "Amy",
+                "RX"
+            ],
+            "round": 12,
+            "court": 1,
+            "score": [
+                7,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "任丽",
+                "Sam Zhou"
+            ],
+            "team2": [
+                "Sherry Wei",
+                "MingLei Yuan"
+            ],
+            "round": 12,
+            "court": 2,
+            "score": [
+                10,
+                15
+            ]
+        },
+        {
+            "team1": [
+                "Ellen",
+                "熊报"
+            ],
+            "team2": [
+                "Jennifer H.",
+                "Tan"
+            ],
+            "round": 12,
+            "court": 3,
+            "score": [
+                4,
+                15
+            ]
+        }
+    ],
+    "availableCourts": [
+        "C1",
+        "C2",
+        "C3"
+    ],
+    "matchesPerPlayer": 8,
+    "courts": 3,
+    "rounds": 12,
+    "user": "admin"
+}

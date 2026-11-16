@@ -28,28 +28,6 @@
 		</p>
 
 		<hr />
-
-		<h3>Matches</h3>
-		View:
-		<select id="filterByPlayer">
-			<option value="" selected>-- ALL PLAYERS --</option>
-		</select>
-		<button onclick="loadDatabase()">Refresh</button>
-
-		<br /><br />
-		<table id="scheduleTable">
-			<thead>
-				<tr>
-					<th>Round</th>
-					<th>Court</th>
-					<th>Team 1</th>
-					<th>Team 2</th>
-					<th>Score</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
-
 		<h3>Queens</h3>
 		<table id="queensTable">
 			<thead>
@@ -79,15 +57,35 @@
 			</thead>
 			<tbody></tbody>
 		</table>
+
+		<h3>Matches</h3>
+		View:
+		<select id="filterByPlayer">
+			<option value="" selected>-- ALL PLAYERS --</option>
+		</select>
+		<button onclick="loadDatabase()">Refresh</button>
+
+		<br /><br />
+		<table id="scheduleTable">
+			<thead>
+				<tr>
+					<th>Round</th>
+					<th>Court</th>
+					<th>Team 1</th>
+					<th>Team 2</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
 	</body>
 
 	<script>
-		const tournamentId = 1;
 		let database = {};
 
 		function loadDatabase() {
 			// load tournament data from the server using the tournamentId
-			fetch(`/api/tournaments/${tournamentId}`)
+			fetch(`tournament.json`)
 				.then((response) => response.json())
 				.then((data) => {
 					database = data;
@@ -108,47 +106,6 @@
 					console.error('Error loading tournament data:', error);
 				});
 
-		}
-
-		function saveScore(matchIdx, score) {
-			// PUT /api/tournaments/:id/matches/:matchIndex
-			// Request body: { "score": [11, 9] }
-			fetch(`/api/tournaments/${tournamentId}/matches/${matchIdx}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ score })
-			})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log('Score saved:', data);
-			})
-			.catch((error) => {
-				console.error('Error saving score:', error);
-				alert('Error saving score. Please try again.\n' + error);
-				loadDatabase();
-			});
-		}
-
-		function saveDatabase() {
-			// PUT /api/tournaments/:id
-			fetch(`/api/tournaments/${tournamentId}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(database)
-			})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log('Database saved:', data);
-			})
-			.catch((error) => {
-				console.error('Error saving database:', error);
-				alert('Error saving database. Please try again.\n' + error);
-				loadDatabase();
-			});
 		}
 
 		loadDatabase();
@@ -249,7 +206,7 @@
 				const team2Class = match.score[1] > match.score[0] ? 'winner' : '';
 				const completed = match.score[0] > 0 || match.score[1] > 0;
 				if (selectedPlayer === '' || match.team1.includes(selectedPlayer) || match.team2.includes(selectedPlayer)) {
-					scheduleTable.innerHTML += `<tr class="${completed ? 'completed' : ''}"><td>${match.round}</td><td>${match.court}</td><td class="${team1Class}"><div>${match.team1[0]}</div><div>${match.team1[1]}</div></td><td class="${team2Class}"><div>${match.team2[0]}</div><div>${match.team2[1]}</div></td><td><div onclick="editMatch(${idx})" style="cursor:pointer;">${match.score[0]}-${match.score[1]}</div></td></tr>`;
+					scheduleTable.innerHTML += `<tr class="${completed ? 'completed' : ''}"><td>${match.round}</td><td>${match.court}</td><td class="${team1Class}"><div>${match.team1[0]}</div><div>${match.team1[1]}</div></td><td class="${team2Class}"><div>${match.team2[0]}</div><div>${match.team2[1]}</div></td><td><div>${match.score[0]}-${match.score[1]}</div></td></tr>`;
 				}
 			});
 
