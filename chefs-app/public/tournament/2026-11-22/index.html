@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CHEFS Pickelball Club Tournament</title>
+
+		<style>
+			:root {
+				--pico-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+				--pico-primary: #126b57;
+				--pico-primary-hover: #0d5544;
+				--pico-primary-focus: rgba(18, 107, 87, .2);
+				--pico-border-radius: 1rem;
+			}
+
+			body {
+				min-height: 100vh;
+				background: radial-gradient(ellipse at 85% 0%, #dcefe8 0, transparent 34rem), #f5f7f6;
+				color: #18312b;
+			}
+
+			main.container {
+				max-width: 860px;
+				padding-top: clamp(2rem, 8vh, 5.5rem);
+				padding-bottom: 4rem;
+				margin: 0 auto;
+			}
+
+			.eyebrow {
+				margin-bottom: .75rem;
+				color: #126b57;
+				font-size: .75rem;
+				font-weight: 750;
+				letter-spacing: .14em;
+				text-transform: uppercase;
+			}
+
+			.event-card {
+				overflow: hidden;
+				border: 1px solid #e1e9e5;
+				border-radius: 1.25rem;
+				background: #fff;
+				box-shadow: 0 18px 50px rgba(24, 49, 43, .08);
+			}
+
+			.event-header {
+				padding: clamp(1.5rem, 5vw, 3rem);
+				background: linear-gradient(125deg, #eaf5f0, #f8fbf9 72%);
+			}
+
+			.event-header h1 {
+				margin-bottom: .65rem;
+				font-size: clamp(2rem, 6vw, 3.25rem);
+				letter-spacing: -.045em;
+			}
+
+			.event-header .intro {
+				max-width: 38rem;
+				margin: 0;
+				color: #52665f;
+				font-size: 1.05rem;
+			}
+
+			.event-details {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 1rem;
+				padding: clamp(1.25rem, 4vw, 2rem) clamp(1.5rem, 5vw, 3rem);
+				border-bottom: 1px solid #e8eeeb;
+			}
+
+			.detail-label {
+				display: block;
+				margin-bottom: .35rem;
+				color: #70827b;
+				font-size: .75rem;
+				font-weight: 700;
+				letter-spacing: .08em;
+				text-transform: uppercase;
+			}
+
+			.detail-value {
+				margin: 0;
+				font-weight: 600;
+			}
+
+			.address {
+				grid-column: 1 / -1;
+			}
+
+			.event-links {
+				padding: clamp(1.5rem, 5vw, 3rem);
+			}
+
+			.event-links h2 {
+				margin-bottom: 1.25rem;
+				font-size: 1.15rem;
+			}
+
+			.event-links ul {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: .85rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.event-links a {
+				display: flex;
+				min-height: 4.25rem;
+				align-items: center;
+				justify-content: space-between;
+				gap: .5rem;
+				padding: .9rem 1rem;
+				border: 1px solid #dfe9e4;
+				border-radius: .75rem;
+				background: #fff;
+				color: #184d40;
+				font-weight: 650;
+				text-decoration: none;
+				transition: border-color .2s ease, background .2s ease, transform .2s ease;
+			}
+
+			.event-links a::after {
+				content: "→";
+				font-size: 1.15rem;
+			}
+
+			.event-links a:hover {
+				transform: translateY(-2px);
+				border-color: #9dc8b8;
+				background: #f5faf7;
+			}
+
+			@media (max-width: 640px) {
+				.event-details,
+				.event-links ul {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+
+	</head>
+	<body>
+		<main class="container">
+			<article class="event-card">
+				<header class="event-header">
+					<p class="eyebrow">CHEFS Pickleball Club</p>
+					<h1>Club Tournament</h1>
+					<p class="intro">A great afternoon of pickleball, friendly competition, and time together. We look forward to seeing you on court.</p>
+				</header>
+
+				<section class="event-details" aria-label="Event details">
+					<div>
+						<span class="detail-label">Date</span>
+						<p class="detail-value"><time datetime="2026-11-22">Sunday, November 22, 2026</time></p>
+					</div>
+					<div>
+						<span class="detail-label">Time</span>
+						<p class="detail-value">2:00 PM</p>
+					</div>
+					<div class="address">
+						<span class="detail-label">Location</span>
+						<p class="detail-value">Rally at Sherwood Village<br>2225 Erin Mills Pkwy, Mississauga, ON L5K 1T9, Canada</p>
+					</div>
+				</section>
+
+				<nav class="event-links" aria-label="Tournament information">
+					<h2>Plan your day</h2>
+					<ul>
+						<li><a href="tournament.html">Tournament schedule</a></li>
+						<li><a href="game.html">Post-tournament games</a></li>
+						<li><a href="dinner.html">Dinner details</a></li>
+					</ul>
+				</nav>
+			</article>
+
+		</main>
+	</body>
+</html>
