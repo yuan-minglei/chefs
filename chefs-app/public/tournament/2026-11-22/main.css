@@ -4,7 +4,16 @@ body {
 table {
 	font-size: 0.75rem;
 	border: var(--pico-border-width) solid var(--pico-table-border-color);
+	--pico-spacing: 4px;
 }
+
+select {
+	font-size: 0.75rem;
+	--pico-form-element-spacing-vertical: 4px;
+	--pico-spacing: 4px;
+}
+
+
 .roster-table caption {
 	text-align: left;
 	font-weight: 500;
