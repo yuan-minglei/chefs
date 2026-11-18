@@ -1,0 +1,19 @@
+body {
+	font-size: 0.8rem;
+}
+table {
+	font-size: 0.75rem;
+	border: var(--pico-border-width) solid var(--pico-table-border-color);
+}
+.roster-table caption {
+	text-align: left;
+	font-weight: 500;
+	color: white;
+	background-color: var(--team-color);
+	padding: 12px 12px;
+	border-radius: 12px 12px 0 0;
+}
+
+.center {
+	text-align: center;
+}

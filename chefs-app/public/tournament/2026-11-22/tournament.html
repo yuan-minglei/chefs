@@ -4,24 +4,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+		<link rel="stylesheet" href="main.css" />
 		<title>CHEFS Pickelball Club Tournament</title>
-		<style>
-			body {
-				font-size: 0.8rem;
-			}
-			.roster-table {
-				font-size: 0.75rem;
-				border: var(--pico-border-width) solid var(--pico-table-border-color);
-			}
-			.roster-table caption {
-				text-align: left;
-				font-weight: 500;
-				color: white;
-				background-color: var(--team-color);
-				padding: 12px 12px;
-				border-radius: 12px 12px 0 0;
-			}
-		</style>
 	</head>
 	<body class="container">
 		<header class="event-header">
@@ -45,19 +29,44 @@
 					</div>
 				</section>
 
+				<hr>
+				<details>
+					<summary> 🧑‍🤝‍🧑 Team Rosters</summary>
+					<section class="grid">
+						<table class="roster-table team-RED">
+							<caption>Red Team · 12 players</caption>
+							<thead><tr><th>Player</th><th>Rating</th><th>Gender</th></tr></thead>
+							<tbody>
+							</tbody>
+						</table>
+						<table class="roster-table team-GREEN">
+							<caption>Green Team · 12 players</caption>
+							<thead><tr><th>Player</th><th>Rating</th><th>Gender</th></tr></thead>
+							<tbody>
+							</tbody>
+						</table>
+						<table class="roster-table team-BLUE">
+							<caption>Blue Team · 12 players</caption>
+							<thead><tr><th>Player</th><th>Rating</th><th>Gender</th></tr></thead>
+							<tbody>
+							</tbody>
+						</table>
+					</section>
+				</details>
+
 				<section>
 					<h5>Stage 1 – Individual Competition</h5>
 					<ul>
-						<li>Duration: 2:00 PM – 3:00 PM</li>
+						<li>Duration: 2:00 PM – 3:15 PM</li>
 						<li>4 matches per player, total 36 matches</li>
-						<li>8 courts, total 4 rounds</li>
+						<li>8 courts, total 5 rounds</li>
 						<li>11 standard points or 15 minutes, whichever comes first.</li>
 
 						<li>
 							Groups:
 							<ul>
-								<li>A: Mix 2.5–2.75 (8 women, 6 men)</li>
-								<li>B: Women 3.0–3.5 (13 women)</li>
+								<li>A: Mix 2.5–2.75 (9 women, 6 men)</li>
+								<li>B: Women 3.0–3.5 (12 women)</li>
 								<li>C: Men 3.0–3.5 (9 men)</li>
 							</ul>
 						</li>
@@ -68,7 +77,7 @@
 				<section>
 					<h5>Stage 2 – Team Competition</h5>
 					<ul>
-						<li>Duration: 3:00 PM – 4:00 PM</li>
+						<li>Duration: 3:15 PM – 4:00 PM</li>
 						<li>6 courts · 3 rounds × 15 minutes</li>
 						<li>11 standard points or 15 minutes, whichever comes first.</li>
 						<li>12 players per team per matchup</li>
@@ -95,34 +104,56 @@
 
 				<section >
 					<h5>Your Tournamement</h5>
-					<ul>
-						<li><a href="">Matches</a></li>
-						<li><a href="">Rankings</a></li>
-					</ul>
+					<details open>
+						<summary> 📅 Schedule</summary>
+						<form>
+  <fieldset class="grid">
+
+							<select id="round-filter">
+								<option value="ALL">-- All Rounds --</option>
+								<option value="1">Round 1 - 2:00</option>
+								<option value="2">Round 2 - 2:15</option>
+								<option value="3">Round 3 - 2:30</option>
+								<option value="4">Round 4 - 2:45</option>
+								<option value="5">Round 5 - 3:00</option>
+								<option value="6">Round 6 - 3:15</option>
+								<option value="7">Round 7 - 3:30</option>
+								<option value="8">Round 8 - 3:45</option>
+							</select>
+							<select id="court-filter">
+								<option value="ALL">-- All Courts --</option>
+								<option value="1">Court 1</option>
+								<option value="2">Court 2</option>
+								<option value="3">Court 3</option>
+								<option value="4">Court 4</option>
+								<option value="5">Court 5</option>
+								<option value="6">Court 6</option>
+								<option value="7">Court 7</option>
+								<option value="17">Court 17</option>
+							</select>
+							<select id="player-filter">
+								<option value="ALL">-- All Players --</option>
+							</select>
+  </fieldset>
+						</form>
+						<table class="schedule-table">
+							<thead>
+								<tr>
+									<th>Round</th><th>Time</th><th>Court</th><th>Team 1</th><th>Team 2</th><th>Score</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</details>
+					<hr>
+					<details>
+						<summary> ⭐ Rankings</summary>
+						<small>coming soon ...</small>
+					</details>
+
 				</section>
 
-				<hr>
-				<h5>Team Rosters</h5>
-				<section class="grid">
-					<table class="roster-table team-RED">
-						<caption>Red Team · 12 players</caption>
-						<thead><tr><th>Player</th><th>Rating</th><th>Gender</th></tr></thead>
-						<tbody>
-						</tbody>
-					</table>
-					<table class="roster-table team-GREEN">
-						<caption>Green Team · 12 players</caption>
-						<thead><tr><th>Player</th><th>Rating</th><th>Gender</th></tr></thead>
-						<tbody>
-						</tbody>
-					</table>
-					<table class="roster-table team-BLUE">
-						<caption>Blue Team · 12 players</caption>
-						<thead><tr><th>Player</th><th>Rating</th><th>Gender</th></tr></thead>
-						<tbody>
-						</tbody>
-					</table>
-				</section>
 
 			</article>
 		</main>
