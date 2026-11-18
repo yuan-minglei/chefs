@@ -146,7 +146,7 @@ function renderTournament(players) {
 
         const tbody = document.createElement('tbody');
         team.players.forEach(player => {
-            appendRow(tbody, [player.player, formatLevel(Number(player.level)), player.gender], false, false);
+            appendRow(tbody, [player.id + ' ' + player.player, formatLevel(Number(player.level)), player.gender], false, false);
         });
         table.appendChild(tbody);
         roster.appendChild(table);
