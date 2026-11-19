@@ -123,15 +123,14 @@
 							</select>
 						</fieldset>
 					</form>
-					<table class="schedule-table">
+					<table class="schedule-table stage-1">
 						<thead>
 							<tr>
 								<th>Round</th>
-								<th>Time</th>
 								<th>Court</th>
 								<th>Team 1</th>
 								<th>Team 2</th>
-								<th>Score</th>
+								<th>Score </th>
 							</tr>
 						</thead>
 						<tbody></tbody>
@@ -140,7 +139,18 @@
 				<hr />
 				<details>
 					<summary>⭐ Stage 1 - Rankings</summary>
-					<small>coming soon ...</small>
+					<table class="ranking-table stage-1">
+						<thead>
+							<tr>
+								<th>Player</th>
+								<th>Wins</th>
+								<th>Losses</th>
+								<th>+/-</th>
+								<th>Rank</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
 				</details>
 				<hr />
 				<details>
@@ -165,49 +175,19 @@
 
 				<details>
 					<summary>📅 Stage 2 – Schedule</summary>
-					<table class="schedule-table-stage-2">
+					<table class="schedule-table stage-2">
 						<thead>
 							<tr>
 								<th>Round</th>
-								<th>Time</th>
 								<th>Court</th>
 								<th>Team 1</th>
 								<th>Team 2</th>
-								<th>Win - Loss</th>
+								<th>Win - Win</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>6</td>
-								<td>3:15</td>
-								<td>1 - 6</td>
-								<td>🔴 RED</td>
-								<td>🟢 GREEN</td>
-								<td>0 - 0</td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>3:30</td>
-								<td>1 - 6</td>
-								<td>🔵 BLUE</td>
-								<td>🔴 RED</td>
-								<td>0 - 0</td>
-							</tr>
-							<tr>
-								<td>8</td>
-								<td>3:45</td>
-								<td>1 - 6</td>
-								<td>🔵 BLUE</td>
-								<td>🟢 GREEN</td>
-								<td>0 - 0</td>
-							</tr>
 						</tbody>
 					</table>
-				</details>
-				<hr />
-				<details>
-					<summary>⭐ Stage 2 - Rankings</summary>
-					<small>coming soon ...</small>
 				</details>
 				<hr />
 				<details>
@@ -219,12 +199,35 @@
 						<li>Individual and team points are combined.</li>
 						<li>The team with the highest total points wins!</li>
 					</ul>
+
+					<table class="ranking-table team-ranking">
+						<thead>
+							<tr>
+								<th>Team</th>
+								<th>Wins</th>
+								<th>Losses</th>
+								<th>Points</th>
+								<th>Rank</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</details>
+
+				<hr>
+
+				<details>
+					<summary>🖶 PrintSheets</summary>
+					<ul>
+						<li><a href="court-score-sheets.html" target="_blank">Court Score Sheets</a></li>
+						<li><a href="player-court-sheets.html" target="_blank">Player Schedule</a></li>
+					</ul>
 				</details>
 			</article>
 		</main>
 
 		<footer>
-			<cite>CHEFS Pickleball Club</cite>
+			<cite id="chefsClub">CHEFS Pickleball Club</cite>
 		</footer>
 
 		<script src="tournament.js"></script>

@@ -5,6 +5,10 @@ table {
 	font-size: 0.75rem;
 	border: var(--pico-border-width) solid var(--pico-table-border-color);
 	--pico-spacing: 4px;
+
+	th,td {
+		padding: var(--pico-spacing) ;
+	}
 }
 
 select {
@@ -23,6 +27,41 @@ select {
 	border-radius: 12px 12px 0 0;
 }
 
+.schedule-table {
+	th:nth-child(1),
+	td:nth-child(1) {
+		white-space: nowrap;
+	}
+}
+
 .center {
 	text-align: center;
 }
+
+.winner {
+	outline: 1px solid #000000;
+    outline-offset: -2px;
+}
+
+.RED::before {
+	content: '🔴';
+}
+.GREEN::before {
+	content: '🟢';
+}
+.BLUE::before {
+	content: '🔵';
+}
+.rank-1::before {
+	content: '🥇';
+	font-size: 1.5rem;
+}
+.rank-2::before {
+	content: '🥈';
+	font-size: 1.5rem;
+}
+.rank-3::before {
+	content: '🥉';
+	font-size: 1.5rem;
+}
+

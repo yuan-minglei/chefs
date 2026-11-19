@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player Court Schedule</title>
+<style>
+  @page {
+    size: landscape;
+    margin: 12mm;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #222;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .team-section {
+    margin-bottom: 28px;
+  }
+
+  .team-section h2 {
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .red h2 { background: #f8d7da; color: #842029; }
+  .green h2 { background: #d1e7dd; color: #0f5132; }
+  .blue h2 { background: #cfe2ff; color: #084298; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  th, td {
+    border: 1px solid #999;
+    padding: 7px 5px;
+    text-align: center;
+  }
+
+  th {
+    background: #eee;
+    font-weight: bold;
+  }
+
+  td.name {
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  td.id {
+    color: #666;
+    font-size: 10px;
+  }
+
+  .team-round {
+    background: #fff3cd;
+    font-weight: bold;
+  }
+
+  .empty {
+    color: #bbb;
+  }
+
+  .legend {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #555;
+  }
+
+  .print-button {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 9px 22px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  @media print {
+    body { margin: 0; }
+    .print-button { display: none; }
+
+    .team-section {
+      break-after: page;
+      page-break-after: always;
+      margin: 0;
+    }
+
+    .team-section:last-child {
+      break-after: auto;
+      page-break-after: auto;
+    }
+
+    table {
+      font-size: 11px;
+    }
+
+    th, td {
+      padding: 7px 4px;
+    }
+
+    thead {
+      display: table-header-group;
+    }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-button" onclick="window.print()">Print Schedule</button>
+
+<h1>Player Court Schedule</h1>
+
+<div id="schedule"></div>
+
+<script>
+const times = [
+  "2:00", "2:15", "2:30", "2:45", "3:00",
+  "3:15", "3:30", "3:45"
+];
+
+const teamRounds = [5, 6, 7];
+
+const teams = [
+  {
+    name: "RED TEAM",
+    className: "red",
+    players: [
+      ["R-1", "杨杨在加国", "C6", "C7", "-", "C7", "C7", "C1", "C2", "C7"],
+      ["R-2", "Sanj Sharma", "-", "C6", "C7", "C7", "C6", "C1", "C2", "C7"],
+      ["R-3", "美焱", "C7", "C7", "C6", "-", "C6", "C1", "C2", "C7"],
+      ["R-4", "Naveed Manzoor", "C7", "-", "C6", "C6", "C7", "C1", "C2", "C7"],
+      ["R-5", "Sandy", "C6", "C6", "C7", "C6", "-", "C1", "C2", "C7"],
+      ["R-6", "jing jing", "C4", "C3", "C3", "C3", "-", "C1", "C2", "C7"],
+      ["R-7", "Sabrina Wilk", "C4", "C3", "C4", "C4", "-", "C1", "C2", "C7"],
+      ["R-8", "Karen Gao", "C3", "C4", "C4", "C3", "-", "C1", "C2", "C7"],
+      ["R-9", "Hongquan", "C1", "C2", "C2", "C2", "-", "C1", "C2", "C7"],
+      ["R-10", "Sharon Law", "C3", "C4", "C3", "C4", "-", "C1", "C2", "C7"],
+      ["R-11", "Tan", "C2", "C2", "C1", "C1", "-", "C1", "C2", "C7"],
+      ["R-12", "Matthew", "C2", "C1", "-", "C2", "C1", "C1", "C2", "C7"]
+    ]
+  },
+  {
+    name: "GREEN TEAM",
+    className: "green",
+    players: [
+      ["G-1", "Ellen Chao", "C6", "-", "C7", "C7", "C17", "C2", "C7", "C1"],
+      ["G-2", "Qi Li", "C17", "C17", "C17", "C6", "-", "C2", "C7", "C1"],
+      ["G-3", "Alexander Ip", "C17", "C17", "C6", "C6", "C6", "C2", "C7", "C1"],
+      ["G-4", "小云", "C6", "-", "C17", "C17", "C6", "C2", "C7", "C1"],
+      ["G-5", "@haider-271", "-", "C6", "C6", "C17", "C17", "C2", "C7", "C1"],
+      ["G-6", "Jennifer H.", "C3", "C5", "C4", "-", "C3", "C2", "C7", "C1"],
+      ["G-7", "Haseena Hui", "C5", "C3", "C4", "-", "C4", "C2", "C7", "C1"],
+      ["G-8", "Carollene Sum", "C5", "C3", "C3", "-", "C3", "C2", "C7", "C1"],
+      ["G-9", "Alex", "C2", "C1", "C2", "C1", "-", "C2", "C7", "C1"],
+      ["G-10", "米豆", "C3", "C5", "C3", "-", "C4", "C2", "C7", "C1"],
+      ["G-11", "Minglei Y", "C1", "-", "C2", "C2", "C1", "C2", "C7", "C1"],
+      ["G-12", "Gangsu", "-", "C2", "C1", "C1", "C1", "C2", "C7", "C1"]
+    ]
+  },
+  {
+    name: "BLUE TEAM",
+    className: "blue",
+    players: [
+      ["B-1", "Calvin D", "C7", "-", "C7", "C7", "C17", "C7", "C1", "C2"],
+      ["B-2", "Iris Ip", "C17", "C7", "C7", "-", "C7", "C7", "C1", "C2"],
+      ["B-3", "Wendy Wen", "C7", "C17", "C17", "-", "C17", "C7", "C1", "C2"],
+      ["B-4", "Peter齐", "C17", "C17", "-", "C17", "C7", "C7", "C1", "C2"],
+      ["B-5", "Fakhara Rana", "-", "C7", "C17", "C17", "C17", "C7", "C1", "C2"],
+      ["B-6", "Jin Wang", "C4", "C5", "-", "C3", "C4", "C7", "C1", "C2"],
+      ["B-7", "Kinga", "C5", "C4", "-", "C4", "C4", "C7", "C1", "C2"],
+      ["B-8", "Xiaobo Lin（Sarah）", "C4", "C5", "-", "C4", "C3", "C7", "C1", "C2"],
+      ["B-9", "拖泥塘", "C1", "C1", "C1", "C1", "-", "C7", "C1", "C2"],
+      ["B-10", "Laura", "C5", "C4", "-", "C3", "C3", "C7", "C1", "C2"],
+      ["B-11", "Steven Luo", "C2", "C1", "C1", "C2", "-", "C7", "C1", "C2"],
+      ["B-12", "Frank Wu", "C1", "C1", "C2", "-", "C1", "C7", "C1", "C2"]
+    ]
+  }
+];
+
+function renderTeam(team) {
+  const section = document.createElement("section");
+  section.className = `team-section ${team.className}`;
+
+  const heading = document.createElement("h2");
+  heading.textContent = team.name;
+  section.appendChild(heading);
+
+  const table = document.createElement("table");
+
+  const thead = document.createElement("thead");
+  const header = document.createElement("tr");
+
+  ["ID", "Player", ...times].forEach((label, index) => {
+    const th = document.createElement("th");
+    th.textContent = index < 2 ? label : `${label} PM`;
+    if (teamRounds.includes(index - 2)) th.className = "team-round";
+    header.appendChild(th);
+  });
+
+  thead.appendChild(header);
+  table.appendChild(thead);
+
+  const tbody = document.createElement("tbody");
+
+  team.players.forEach(player => {
+    const tr = document.createElement("tr");
+
+    player.forEach((value, index) => {
+      const td = document.createElement("td");
+      td.textContent = value;
+
+      if (index === 0) td.className = "id";
+      if (index === 1) td.className = "name";
+      if (index >= 7) td.classList.add("team-round");
+      if (value === "-") td.classList.add("empty");
+
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  section.appendChild(table);
+
+  const legend = document.createElement("div");
+  legend.className = "legend";
+  legend.textContent =
+    "— = No individual match   |   Yellow columns = Team rounds";
+  section.appendChild(legend);
+
+  return section;
+}
+
+const container = document.getElementById("schedule");
+teams.forEach(team => container.appendChild(renderTeam(team)));
+</script>
+
+</body>
+</html>
