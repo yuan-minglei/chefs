@@ -93,8 +93,12 @@ function renderTournament(tournament) {
 	const rankingTable = document.querySelector('.ranking-table.stage-1 tbody');
 	rankingTable.replaceChildren();
 
-	[...tournament.players].sort((a, b) => a.rank - b.rank)
-		.forEach((player, index) => {
+	function renderPlayerRanking(title, players) {
+		const tr = rankingTable.appendChild(document.createElement('tr'));
+		tr.innerHTML = `
+			<td colspan="5" style="font-weight: 500; background: #f0f0f0;">${title}</td>
+		`;
+		[...players].sort((a, b) => a.rank - b.rank).forEach((player, index) => {
 			const tr = rankingTable.appendChild(document.createElement('tr'));
 			tr.innerHTML = `
 				<td>${player.id} ${player.player}</td>
@@ -104,6 +108,10 @@ function renderTournament(tournament) {
 				<td>${player.rank ?? 0}</td>
 			`;
 		});
+	}
+	renderPlayerRanking('Group A : Mix 2.5–2.75 (9 women, 6 men)', tournament.players.filter(p => p.level < 3.0));
+	renderPlayerRanking('Group B : Women 3.0–3.5 (12 women)', tournament.players.filter(p => p.level >= 3.0 && p.gender === 'F'));
+	renderPlayerRanking('Group C : Men 3.0–3.5 (9 men)', tournament.players.filter(p => p.level >= 3.0 && p.gender === 'M'));
 
 	const scheduleTable2 = document.querySelector('.schedule-table.stage-2 tbody');
 	scheduleTable2.replaceChildren();
@@ -239,24 +247,33 @@ function calculateTournament() {
 		});
 
 	const sortedPlayers = [...tournament.players].sort(
-		(a, b) => b.win - a.win || b.points - a.points
+		(a, b) => b.wins - a.wins || b.points - a.points
 	);
 
-	let rank = 0;
+	function rank(players) {
+		let rank = 0;
+		players.forEach((player, index) => {
+			const previous = players[index - 1];
 
-	sortedPlayers.forEach((player, index) => {
-		const previous = sortedPlayers[index - 1];
+			if (
+				index === 0 ||
+				player.wins !== previous.wins ||
+				player.points !== previous.points
+			) {
+				rank = index + 1;
+			}
 
-		if (
-			index === 0 ||
-			player.win !== previous.win ||
-			player.points !== previous.points
-		) {
-			rank = index + 1;
-		}
+			player.rank = rank;
+		});
+	}
 
-		player.rank = rank;
-	});
+	// rank players by 3 group
+	// group a: Mix 2.5–2.75 (9 women, 6 men)
+	// group b: Women 3.0–3.5 (12 women)
+	// group c: Men 3.0–3.5 (9 men)
+	rank(sortedPlayers.filter(player => player.level < 3.0));
+	rank(sortedPlayers.filter(player => player.level >= 3.0 && player.gender === 'F'));
+	rank(sortedPlayers.filter(player => player.level >= 3.0 && player.gender === 'M'));
 	tournament.players.forEach((player) => {
 		player.rank = sortedPlayers.find(p => p.id === player.id).rank;
 	});
@@ -317,4 +334,9 @@ document.getElementById('chefsClub').addEventListener('dblclick', () => {
 		document.getElementById('chefsClub').style.color = 'red';
 		renderTournament(tournament);
 	}
+});
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        loadData();
+    }
 });
